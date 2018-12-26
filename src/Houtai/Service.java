@@ -53,11 +53,11 @@ public class Service {
     		//map.get("z02").sendsocket_at(at);
     		}
     	}else if(num==100){
-    		try {map.get("z01").closesocket_at();
+    		try {map.get("z01").closesocket_at(1);
     		} catch (Exception ex) {}
-    		try {map.get("z02").closesocket_at();
+    		try {map.get("z02").closesocket_at(1);//全关
     		} catch (Exception ex) {}
-    		try {map.get("z03").closesocket_at();
+    		try {map.get("z03").closesocket_at(1);
     		} catch (Exception ex) {}
     	}else {
     		System.out.println("发送at");
@@ -69,33 +69,42 @@ public class Service {
 	    		
 	    		try {map.get("z03").sendsocket_3at(1);
 	    		} catch (Exception ex) {}
-	    		//zheng
+	    		//zheng 1
 	    		try {map.get("z01").sendsocket_at(0);
 	    		} catch (Exception ex) {}
 	    		
 	    		try {map.get("z02").sendsocket_2at(0);
 	    		}catch (Exception ex) {}
-	    		//fang	    		
-	    		try {map.get("z02").sendsocket_2at(100);
-	    		}catch (Exception ex) {}
-	    		
-	    		try {map.get("z01").sendsocket_at(100);
+	    		//fang	  2   
+	    		try {map.get("z02").closesocket_at(2);//关02
 	    		} catch (Exception ex) {}
-	    		//zheng
 	    		try {map.get("z01").sendsocket_at(0);
 	    		} catch (Exception ex) {}
 	    		
 	    		try {map.get("z02").sendsocket_2at(0);
+	    		}catch (Exception ex) {}
+	    		//zheng 3
+	    		try {map.get("z02").closesocket_at(2);//关02
 	    		} catch (Exception ex) {}
+	    		try {map.get("z01").sendsocket_at(0);
+	    		} catch (Exception ex) {}
+	    		
+	    		try {map.get("z02").sendsocket_2at(0);
+	    		}catch (Exception ex) {}
 	    		
 	    		//fang
-	    		try {map.get("z02").sendsocket_2at(100);
+	    		try {map.get("z02").closesocket_at(2);//关02
+	    		} catch (Exception ex) {}
+	    		try {map.get("z01").sendsocket_at(0);
 	    		} catch (Exception ex) {}
 	    		
-	    		try {map.get("z01").sendsocket_at(100);
-	    		} catch (Exception ex) {}
+	    		try {map.get("z02").sendsocket_2at(0);
+	    		}catch (Exception ex) {}
+	    		// 
 	    		
-	    		try {map.get("z01").closesocket_at();
+	    		try {map.get("z01").closesocket_at(1);
+	    		} catch (Exception ex) {}
+	    		try {map.get("z02").closesocket_at(2);//关02
 	    		} catch (Exception ex) {}
 	    		//map.get("z02").closesocket_at();
 	    		
@@ -109,7 +118,7 @@ public class Service {
 	    			try {map.get("z01").sendsocket_at(8);
 	    			} catch (Exception ex) {}
 	    			
-	    			try {map.get("z01").closesocket_at();
+	    			try {map.get("z01").closesocket_at(1);
 	    			} catch (Exception ex) {}
 	    			
 	    			try {map.get("z02").sendsocket_2at(num);
@@ -334,7 +343,7 @@ public class Service {
 						e.printStackTrace();
 					}				
 					try {
-						Thread.sleep(200);
+						Thread.sleep(100);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -352,7 +361,7 @@ public class Service {
 						e.printStackTrace();
 					}				
 					try {
-						Thread.sleep(200);
+						Thread.sleep(100);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -422,16 +431,29 @@ public class Service {
         	}
        		
         }
-        public void closesocket_at() {
-        	try {
-				os=ssocket.getOutputStream();
-				byte d[] = "all00000000".getBytes();            // 只能输出byte数组，所以将字符串变为byte数组
-				os.write(d);               
-	             os.flush();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+        public void closesocket_at(int num) {
+        	if(num==1) {
+	        	try {
+					os=ssocket.getOutputStream();
+					byte d[] = "all00000000".getBytes();            // 只能输出byte数组，所以将字符串变为byte数组
+					os.write(d);               
+		             os.flush();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        	}else
+        	{
+        		try {
+					os=ssocket.getOutputStream();
+					byte d[] = "all11110000".getBytes();            // 只能输出byte数组，所以将字符串变为byte数组
+					os.write(d);               
+		             os.flush();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        	}
         }
         public void sendsocket_2at(int at) {
         	String []msgattt= {
@@ -455,7 +477,7 @@ public class Service {
 						e.printStackTrace();
 					}			
 					try {
-						Thread.sleep(200);
+						Thread.sleep(100);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -473,7 +495,7 @@ public class Service {
 							e.printStackTrace();
 						}				
 						try {
-							Thread.sleep(200);
+							Thread.sleep(100);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
