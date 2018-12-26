@@ -20,10 +20,10 @@ public class Service {
     List<Socket> clients;
     List<Mythread> tmhread=new ArrayList<Mythread>();
     ServerSocket server;
-    //Map<Integer, Mythread> map = new HashMap<Integer, Mythread>(); 
     Map<String, Mythread> map = new HashMap<String, Mythread>(); 
     String [] msg_at= {"01","02","03","04"};
     Mythread mythread = null;
+    private boolean isshan=true;
     private String Socke_at=null;
     public String  get_msg() {
     	String msgdd = null;
@@ -40,12 +40,6 @@ public class Service {
     	return msgdd;
     }
     public void send_at(String at,int num) {
-//    	 for (int i = tmhread.size() - 1; i >= 0; i--) {
-//    		 Mythread ss=tmhread.get(i);
-//           if(ss!=null) {
-//        	    ss.sendsocket_at(at);
-//           }
-//         }
     	if(at.equals("input")) {
     		System.out.println("发送input"+map.get("z02"));
     		if(map.get("z02")!=null) {
@@ -53,6 +47,7 @@ public class Service {
     		//map.get("z02").sendsocket_at(at);
     		}
     	}else if(num==100){
+    		isshan=false;
     		try {map.get("z01").closesocket_at(1);
     		} catch (Exception ex) {}
     		try {map.get("z02").closesocket_at(1);//全关
@@ -63,96 +58,67 @@ public class Service {
     		System.out.println("发送at");
 	    	//System.out.println(num); 
 	    	if(map.get("z01")!=null||map.get("z02")!=null) {
-	    		
 	    		try {map.get("z02").sendsocket_3at(0);
 	    		} catch (Exception ex) {}
+	    	//闪烁
+	    	 Thread shan = new Thread(new Runnable(){  
+		             public void run(){  
+		            	 System.out.println(num); 
+		            	
+			 	    		
+		            	 for(int i=0;i<8;i++) {
+		            		 System.out.println(i);
+		            		 try {map.get("z01").sendall();
+				 	    		} catch (Exception ex) {}
+		            		 try {map.get("z02").sendall();
+				 	    		} catch (Exception ex) {}
+
+		            		 
+				 	    		
+				 	    		try {map.get("z01").sendsocket_at(0,20);
+				 	    		} catch (Exception ex) {}
+				 	    		
+				 	    		try {map.get("z02").sendsocket_2at(0,20);
+				 	    		}catch (Exception ex) {}
+		            	 }
+		            	
+//		 	    
+		            // run方法具体重写
+		            	 while(isshan) {
+		            	 if(num>0&&num<=8) {
+		 	    			System.out.println("01"+num); 
+		 	    			try {map.get("z01").sendsocket_at(100,num);//shan
+		 		    		} catch (Exception ex) {}
+		 	    			
+		 	    			}
+		 	    		if(num>8&&num<=12) {
+		 	    			System.out.println("02"+num); 
+		 	    			try {map.get("z02").sendsocket_2at(100,num);//shan
+		 		    		} catch (Exception ex) {}
+		 	    			
+		 	    		}
+		 	    		try {
+							Thread.sleep(150);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+		            	
+		            	 }
+		            	 
+		            	 isshan=true;
+		             }
+		             }
+	    	 );  
+	    	 shan.start(); 
+
 	    		
 	    		try {map.get("z03").sendsocket_3at(1);
 	    		} catch (Exception ex) {}
-	    		//zheng 1
-	    		try {map.get("z01").sendsocket_at(0);
-	    		} catch (Exception ex) {}
-	    		
-	    		try {map.get("z02").sendsocket_2at(0);
-	    		}catch (Exception ex) {}
-	    		//fang	  2   
-	    		try {map.get("z02").closesocket_at(2);//关02
-	    		} catch (Exception ex) {}
-	    		try {map.get("z01").sendsocket_at(0);
-	    		} catch (Exception ex) {}
-	    		
-	    		try {map.get("z02").sendsocket_2at(0);
-	    		}catch (Exception ex) {}
-	    		//zheng 3
-	    		try {map.get("z02").closesocket_at(2);//关02
-	    		} catch (Exception ex) {}
-	    		try {map.get("z01").sendsocket_at(0);
-	    		} catch (Exception ex) {}
-	    		
-	    		try {map.get("z02").sendsocket_2at(0);
-	    		}catch (Exception ex) {}
-	    		
-	    		//fang
-	    		try {map.get("z02").closesocket_at(2);//关02
-	    		} catch (Exception ex) {}
-	    		try {map.get("z01").sendsocket_at(0);
-	    		} catch (Exception ex) {}
-	    		
-	    		try {map.get("z02").sendsocket_2at(0);
-	    		}catch (Exception ex) {}
-	    		// 
-	    		
-	    		try {map.get("z01").closesocket_at(1);
-	    		} catch (Exception ex) {}
-	    		try {map.get("z02").closesocket_at(2);//关02
-	    		} catch (Exception ex) {}
-	    		//map.get("z02").closesocket_at();
-	    		
-	    		if(num>0&&num<=8) {
-	    			System.out.println("01"); 
-	    			try {map.get("z01").sendsocket_at(num);
-	    			} catch (Exception ex) {}
-	    			}
-	    		if(num>8&&num<=12) {
-	    			System.out.println("02"); 
-	    			try {map.get("z01").sendsocket_at(8);
-	    			} catch (Exception ex) {}
-	    			
-	    			try {map.get("z01").closesocket_at(1);
-	    			} catch (Exception ex) {}
-	    			
-	    			try {map.get("z02").sendsocket_2at(num);
-	    			} catch (Exception ex) {}
-	    		}
 	    	}
-
-	    	
     	}
     }
-//    public void map_ss(Mythread map_socket,int port,Mythread my) {
-//    	if(map_socket==null) {
-//           	 map.put(port, my);
-//           	 for (Entry<Integer, Mythread> entry : map.entrySet()) { 
-//           		 System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue()); 
-//           	 					}
-//       			                     
-//   	 }else {
-//   	
-//   		// System.out.println((map_socket==ssocket)+"....kong"); 
-////   		 if(map_socket.equals(ssocket)) {
-//   		 if(map_socket.equals(my)) {
-//  			 System.out.println("相等空"); 
-//   			// num();
-//   		 }else {
-//   			 System.out.println("不相等空"); 
-//   			map.put(port, my);
-//           	 for (Entry<Integer, Mythread> entry : map.entrySet()) { 
-//           		 System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue()); 
-//           			                       }
-//           	 //map_socket.close();
-//   		 }
-//   	 }
-//    }
+
 
     public void Service() {
         try {
@@ -190,6 +156,7 @@ public class Service {
         public String get_input_msg=null;
         private int at=0;
         private volatile boolean isRun = true;
+        private boolean turn_on=true;
        
         public boolean vall(InputStream br) {
         	
@@ -240,13 +207,7 @@ public class Service {
                // br =ssocket.getInputStream(); //new BufferedReader(new InputStreamReader(ssocket.getInputStream()));
              
                 
-//                if(Socke_at!=null) {//防止未发送
-//                	boolean flg=true;
-//                	flg=vall(br);
-//                	if(!flg) {
-//                		sendsocket_at(Socke_at);
-//                	}
-//                }
+
                 while (isRun&&!ssocket.isClosed() && !ssocket.isInputShutdown()){
 	                if((rcvLen = br.read(buff))!=-1&&!ssocket.isClosed())
 	                {            
@@ -304,28 +265,18 @@ public class Service {
 	                	System.out.println("线程if结束");
 	                	}
                 } 
-                System.out.println("线程结束");
-//				if(this.os!=null) 
-//					this.os.close(); 
-//				if(br!=null) 
-//					br.close();
-//				clients.remove(ssocket);
-//				tmhread.remove(this);
-//				 System.out.println("线程长度"+clients.size()+tmhread.size()); 
-//				if(ssocket!=null&&!ssocket.isClosed()) 
-//					ssocket.close(); 
-				
+                System.out.println("线程结束");		
             } catch (Exception ex) {
             	isRun=false;
             }
         }
        
-        public void sendsocket_at(int at) {
+        public void sendsocket_at(int at,int num) {
         	String []msgattt= {
-        			"all00000001","all00000011","all00000111","all00001111","all00011111","all00111111","all01111111","all11111111"
+        			"all01111111","all00111111","all00011111","all00001111","all00000111","all00000011","all00000001","all00000000"
         	};
         	String []fang= {
-        			"all00000000","all00000001","all00000011","all00000111","all00001111","all00011111","all00111111","all01111111"
+        			"all11111110","all11111101","all11111011","all11110111","all11101111","all11011111","all10111111","all01111111"
         	};
         	String []ledbuff= {
         			"all00000001","all00000010","all00000100","all00001000","all00010000","all00100000","all01000000","all10000000"
@@ -350,22 +301,28 @@ public class Service {
 					}
 				}
         	}else if(at==100){
-        		for(int i=8;i>0;i--) {
+        		if(turn_on) {
+					turn_on=false;
 					try {
 						os=ssocket.getOutputStream();
-						byte d[] = fang[i-1].getBytes();            // 只能输出byte数组，所以将字符串变为byte数组
+						byte d[] = fang[num].getBytes();            // 只能输出byte数组，所以将字符串变为byte数组
 						os.write(d);               
 			             os.flush();
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}				
+					}			
+				}else {
+					turn_on=true;
 					try {
-						Thread.sleep(100);
-					} catch (InterruptedException e) {
+						os=ssocket.getOutputStream();
+						byte d[] = "all11111111".getBytes();            // 只能输出byte数组，所以将字符串变为byte数组
+						os.write(d);               
+			             os.flush();
+					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
-					}
+					}			
 				}
         	}
         	else {
@@ -382,6 +339,17 @@ public class Service {
     				}    
         		}   
         	}		
+        }
+        public void sendall() {
+        	try {
+				os=ssocket.getOutputStream();
+				byte d[] = "all11111111".getBytes();            // 只能输出byte数组，所以将字符串变为byte数组
+				os.write(d);               
+	             os.flush();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
         }
         public void sendsocket_3at(int at) {
         	String []msga2= {
@@ -455,12 +423,15 @@ public class Service {
 				}
         	}
         }
-        public void sendsocket_2at(int at) {
+        public void sendsocket_2at(int at,int num) {
         	String []msgattt= {
-        			"all11110001","all11110011","all11110111","all11111111"
+        			"all11110111","all11110011","all11110001","all11110000"
         	};
         	String []fang= {
-        			"all11110000","all11110001","all11110011","all11110111"
+        			"all11111110","all11111101","all11111011","all11110111"
+        	};
+        	String []fanxingzuo= {
+        			"all11111110","all11111101","all11111011","all11110111"
         	};
         	String []ledbuff= {
         			"all11110001","all11110010","all11110100","all11111000"
@@ -484,23 +455,30 @@ public class Service {
 					}
 					}
 				}else if(at==100){
-	        		for(int i=4;i>0;i--) {
+					if(turn_on) {
+						turn_on=false;
 						try {
 							os=ssocket.getOutputStream();
-							byte d[] = fang[i-1].getBytes();            // 只能输出byte数组，所以将字符串变为byte数组
+							byte d[] = fanxingzuo[num-9].getBytes();            // 只能输出byte数组，所以将字符串变为byte数组
 							os.write(d);               
 				             os.flush();
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-						}				
+						}			
+					}else {
+						turn_on=true;
 						try {
-							Thread.sleep(100);
-						} catch (InterruptedException e) {
+							os=ssocket.getOutputStream();
+							byte d[] = "all11111111".getBytes();            // 只能输出byte数组，所以将字符串变为byte数组
+							os.write(d);               
+				             os.flush();
+						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
-						}
-					}
+						}			
+					} 
+					
 	        	}else {
 	        		for(int j=0;j<at-8;j++) {
 	        			try {				
@@ -561,15 +539,7 @@ public class Service {
 	    }
     }
     public void de_ser() {
-//   	 for (Entry<String, Socket> entry : map.entrySet()) { 
-//                         System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue()); 
-//                         try {
-//							entry.getValue().close();
-//						} catch (IOException e) {
-//							// TODO Auto-generated catch block
-//							e.printStackTrace();
-//						}
-//                       }
+
     }
    
 		
