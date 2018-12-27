@@ -98,7 +98,7 @@ public class Service {
 		 	    			
 		 	    		}
 		 	    		try {
-							Thread.sleep(150);
+							Thread.sleep(400);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
