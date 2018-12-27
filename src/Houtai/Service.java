@@ -66,8 +66,8 @@ public class Service {
 		            	 System.out.println(num); 
 		            	
 			 	    		
-		            	 for(int i=0;i<8;i++) {
-		            		 System.out.println(i);
+		            	 for(int i=0;i<5;i++) {
+//		            		 System.out.println(i);
 		            		 try {map.get("z01").sendall();
 				 	    		} catch (Exception ex) {}
 		            		 try {map.get("z02").sendall();
@@ -82,20 +82,30 @@ public class Service {
 				 	    		}catch (Exception ex) {}
 		            	 }
 		            	
+		            	 
+		            	 if(num>0&&num<=8) {
+		            		 
+		            		 try {map.get("z02").sendall();
+				 	    		} catch (Exception ex) {}
+			 	    			}
+			 	    	if(num>8&&num<=12) {
+			 	    		try {map.get("z01").sendall();
+			 	    		} catch (Exception ex) {
+			 	    		}
+			 	    	}
 //		 	    
 		            // run方法具体重写
 		            	 while(isshan) {
 		            	 if(num>0&&num<=8) {
-		 	    			System.out.println("01"+num); 
+		 	    			//System.out.println("01"+num); 
 		 	    			try {map.get("z01").sendsocket_at(100,num);//shan
 		 		    		} catch (Exception ex) {}
 		 	    			
 		 	    			}
 		 	    		if(num>8&&num<=12) {
-		 	    			System.out.println("02"+num); 
+		 	    			//System.out.println("02"+num); 
 		 	    			try {map.get("z02").sendsocket_2at(100,num);//shan
-		 		    		} catch (Exception ex) {}
-		 	    			
+		 		    		} catch (Exception ex) {}    			
 		 	    		}
 		 	    		try {
 							Thread.sleep(400);
@@ -294,7 +304,7 @@ public class Service {
 						e.printStackTrace();
 					}				
 					try {
-						Thread.sleep(100);
+						Thread.sleep(250);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -305,7 +315,7 @@ public class Service {
 					turn_on=false;
 					try {
 						os=ssocket.getOutputStream();
-						byte d[] = fang[num].getBytes();            // 只能输出byte数组，所以将字符串变为byte数组
+						byte d[] = fang[num-1].getBytes();            // 只能输出byte数组，所以将字符串变为byte数组
 						os.write(d);               
 			             os.flush();
 					} catch (IOException e) {
@@ -448,7 +458,7 @@ public class Service {
 						e.printStackTrace();
 					}			
 					try {
-						Thread.sleep(100);
+						Thread.sleep(250);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
