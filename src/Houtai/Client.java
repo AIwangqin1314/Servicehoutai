@@ -25,6 +25,7 @@ public class Client extends HttpServlet {
 	String at="all00000000";
 	private boolean send_flg=false;
 	private int time_num=0;
+	private int stop_num=0;
 	 Timer t=new Timer();
     /**
      * @see HttpServlet#HttpServlet()
@@ -48,6 +49,7 @@ public class Client extends HttpServlet {
 	    	time_num++;
 	    	if(time_num>=6*3+2) {
 	    		time_num=0;
+	    		stop_num=0;
 	    		System.out.println("АлїЄ");
 				send_flg=false;
 		        myThread.send_at("all",100);
@@ -60,16 +62,23 @@ public class Client extends HttpServlet {
 	        if(msg_ny==null) {
 	        	
 	        }else {
-		         msg_in=msg_ny.substring(0, 13);}
-	        
-	        
+		         msg_in=msg_ny.substring(0, 13);
+		         }
 				System.out.println(msg_ny+":"+msg_in);
 				if("input00000000".equals(msg_in)) {
-					System.out.println("АлїЄ");
-					send_flg=false;
-					time_num=0;
-			        myThread.send_at("all",100);
-			        this.cancel();
+					stop_num++;
+					System.out.println(stop_num+"hj255");
+					if(stop_num>3) {
+						stop_num=0;
+						System.out.println("АлїЄ");
+	//					send_flg=false;
+						time_num=0;
+				        myThread.send_at("all",100);		        
+				        send_flg=false;
+				        this.cancel();
+				        }else {
+				        	
+				        }
 				}      
 	    	}
 				
