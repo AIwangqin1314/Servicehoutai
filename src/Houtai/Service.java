@@ -48,12 +48,12 @@ public class Service {
     		}
     	}else if(num==100){
     		isshan=false;
-    		try {map.get("z01").closesocket_at(1);
-    		} catch (Exception ex) {}
-    		try {map.get("z02").closesocket_at(1);//全关
-    		} catch (Exception ex) {}
-    		try {map.get("z03").closesocket_at(1);
-    		} catch (Exception ex) {}
+//    		try {map.get("z01").closesocket_at(1);
+//    		} catch (Exception ex) {}
+//    		try {map.get("z02").closesocket_at(1);//全关
+//    		} catch (Exception ex) {}
+//    		try {map.get("z03").closesocket_at(1);
+//    		} catch (Exception ex) {}
     	}else {
     		System.out.println("发送at");
 	    	//System.out.println(num); 
@@ -115,7 +115,12 @@ public class Service {
 						}
 		            	
 		            	 }
-		            	 
+		            	 try {map.get("z01").closesocket_at(1);
+		         		} catch (Exception ex) {}
+		         		try {map.get("z02").closesocket_at(1);//全关
+		         		} catch (Exception ex) {}
+		         		try {map.get("z03").closesocket_at(1);
+		         		} catch (Exception ex) {}
 		            	 isshan=true;
 		             }
 		             }

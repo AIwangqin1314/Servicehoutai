@@ -66,10 +66,10 @@ public class Client extends HttpServlet {
 		         }
 				System.out.println(msg_ny+":"+msg_in);
 				if("input00000000".equals(msg_in)) {
-					stop_num++;
-					System.out.println(stop_num+"hj255");
-					if(stop_num>3) {
-						stop_num=0;
+					//stop_num++;
+					System.out.println(time_num+stop_num+"计数值");
+					if(time_num>3) {
+						//stop_num=0;
 						System.out.println("离开");
 	//					send_flg=false;
 						time_num=0;
