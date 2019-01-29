@@ -210,5 +210,137 @@ public class Client extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+	public int count(String br,String splmsg) {
+		String[]  strs=br.split(splmsg);
+		int count_num=100;
+		for(int i=0;i<strs.length;i++){
+			System.out.println(strs[i]);
+				}
+		int datex=Integer.parseInt(strs[2]);
+		switch(strs[1]) {
+		case "01":
+			if(datex>19) {
+				System.out.println("Ë®Æ¿×ù");
+				count_num=0;
+			}
+			else {
+				System.out.println("Ä¦ôÉ×ù");
+				count_num=11;
+			}
+			break;
+		case "02":
+			if(datex>18) {
+				System.out.println("Ë«Óã×ù");
+				count_num=1;
+			}
+			else {
+				System.out.println("Ë®Æ¿×ù");
+				count_num=0;
+			}
+			break;
+		case "03":
+			if(datex>20) {
+				System.out.println("°×Ñò×ù");
+				count_num=2;
+			}
+			else {
+				System.out.println("Ë«Óã×ù");
+				count_num=1;
+			}
+			break;
+		case "04":
+			if(datex>19) {
+				System.out.println("½ðÅ£×ù");
+				count_num=3;
+			}
+			else {
+				System.out.println("°×Ñò×ù");
+				count_num=2;
+			}
+			break;
+		case "05":
+			if(datex>20) {
+				System.out.println("Ë«×Ó×ù");
+				count_num=4;
+			}
+			else {
+				System.out.println("½ðÅ£×ù");
+				count_num=3;
+			}
+			break;
+		case "06":
+			if(datex>21) {
+				System.out.println("¾ÞÐ·×ù");
+				count_num=5;
+			}
+			else {
+				System.out.println("Ë«×Ó×ù");
+				count_num=4;
+			}
+			break;
+		case "07":
+			if(datex>22) {
+				System.out.println("Ê¨×Ó×ù");
+				count_num=6;
+			}
+			else  {
+				System.out.println("¾ÞÐ·×ù");
+				count_num=5;
+			}
+			
+			break;
+		case "08":
+			if(datex>22) {
+				System.out.println("´¦Å®×ù");
+				count_num=7;
+			}
+			else {
+				System.out.println("Ê¨×Ó×ù");
+				count_num=6;
+			}
+			break;
+		case "09":
+			if(datex>22) {
+				System.out.println("ÌìÐ«×ù");
+				count_num=8;
+			}
+			else {
+				System.out.println("´¦Å®×ù");
+				count_num=7;
+			}
+			break;
+		case "10":
+			if(datex>23) {
+				System.out.println("ÉäÊÖ×ù");
+				count_num=9;
+			}
+			else {
+				System.out.println("ÌìÐ«×ù");
+				count_num=8;
+			}
+			break;
+		case "11":
+			if(datex>22) {
+				System.out.println("Ä¦ôÉ×ù");
+				count_num=10;
+			}
+			else {
+				System.out.println("ÉäÊÖ×ù");
+				count_num=9;
+			}
+			break;
+		case "12":
+			if(datex>21) {
+				System.out.println("Ë®Æ¿×ù");
+				count_num=11;
+			}
+			else {
+				System.out.println("Ä¦ôÉ×ù");
+				count_num=10;
+			}
+			break;
+		}
+		return count_num;
+	}
 
 }
